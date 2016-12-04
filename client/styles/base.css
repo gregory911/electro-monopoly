@@ -1,14 +1,94 @@
 :root {
-  --black: #000;
-  --white: #fff;
+  --black: #000000;
+  --white: #FFFFFF;
+  --success: rgb(34,139,34);
+  --danger: rgb(255,0,0);
+  --purple: #663399;
+  --paleblue: #d9f7f7;
+  --rose: #e600e6;
+  --orange: #ffa500;
+  --red: #ff0000;
+  --yellow: #ffff00;
+  --green: #32cd32;
+  --blue: #0000ff;
+  --airport: #a9a9a9;
+  --service: #000000;
 }
 
-body {
-  font: 12px Helvetica, Arial, sans-serif;
-}
+/* COLOR CODES */
+  .danger {
+    color: var(--danger);
+  }
+  .success {
+    color: var(--success);
+  }
+  .purple_spot {
+    background-color: var(--purple);
+  }
+  .paleblue_spot {
+    background-color: var(--paleblue);
+  }
+  .rose_spot {
+    background-color: var(--rose);
+  }
+  .orange_spot {
+    background-color: var(--orange);
+  }
+  .red_spot {
+    background-color: var(--red);
+  }
+  .yellow_spot {
+    background-color: var(--yellow);
+  }
+  .green_spot {
+    background-color: var(--green);
+  }
+  .blue_spot {
+    background-color: var(--blue);
+  }
+  .airport_spot {
+    background-color: var(--airport);
+  }
+  .service_spot {
+    background-color: var(--service);
+  }
 
-a.button {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
+/* STYLES */
+  body {
+    color: var(--black);
+    text-align: center;
+  }
+  .container {
+    margin: 0 auto;
+    width: 90%;
+    min-width: 800px;
+    max-width: 1200px;
+  }
+  .inactive {
+    display: none;
+  }
+  .half-col {
+    display: inline-block;
+    width: 49%;
+  }
+  .third-col {
+    display: inline-block;
+    width: 30%;
+  }
+  .formButtons {
+    padding: 20px;
+  }
+  .goSubmit {
+    float: right;
+    margin-top: 2px;
+  }
+  .button.danger {
+    border: 1px solid var(--danger);
+    border-radius: 50%;
+    display: inline-block;
+    font-weight: bold;
+    height: 15px;
+    line-height: 15px;
+    text-align: center;
+    width: 15px;
+  }

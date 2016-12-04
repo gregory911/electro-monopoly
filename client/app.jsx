@@ -8,6 +8,7 @@ import {routes} from "./routes";
 import {Router} from "react-router";
 import {createStore} from "redux";
 import {Provider} from "react-redux";
+import "./styles/normalize.css";
 import "./styles/base.css";
 import rootReducer from "./reducers";
 
