@@ -67,11 +67,11 @@
   .inactive {
     display: none;
   }
-  .half-col {
+  .halfCol {
     display: inline-block;
     width: 49%;
   }
-  .third-col {
+  .thirdCol {
     display: inline-block;
     width: 30%;
   }

@@ -1,30 +1,34 @@
 import {combineReducers} from "redux";
 
-const checkBox = (store, action) => {
-  if (action.type === "TOGGLE_CHECK") {
+const gameStart = (store, action) => {
+  if (action.type === "TOGGLE_GAMESTART") {
     return {
-      checked: !store.checked
+      value: !store.value
     };
   }
 
-  return store || {checked: false};
+  return store || {value: false};
 };
 
-const number = (store, action) => {
-  if (action.type === "INC_NUMBER") {
-    return {
-      value: store.value + 1
-    };
-  } else if (action.type === "DEC_NUMBER") {
-    return {
-      value: store.value - 1
-    };
+const playersQty = (store, action) => {
+  if (action.type === "INC_PLAYER_QTY") {
+    if(store.value < 6) {
+      return {
+        value: store.value + 1
+      }; 
+    }
+  } else if (action.type === "DEC_PLAYER_QTY") {
+    if(store.value > 2) {
+      return {
+        value: store.value - 1
+      }; 
+    }
   }
 
-  return store || {value: 0};
+  return store || {value: 2};
 };
 
 export default combineReducers({
-  checkBox,
-  number
+  gameStart,
+  playersQty
 });

@@ -18,7 +18,7 @@ describe("Home", () => {
 
   it("has expected content with deep render", () => {
     const initialState = {
-      checkBox: {checked: false},
+      gameStart: {value: false},
       number: {value: 999}
     };
 
