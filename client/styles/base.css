@@ -17,7 +17,7 @@
 
 /* COLOR CODES */
   .danger {
-    color: var(--danger);
+    color: red;
   }
   .success {
     color: var(--success);
@@ -53,7 +53,7 @@
     background-color: var(--service);
   }
 
-/* STYLES */
+/* GENERAL */
   body {
     color: var(--black);
     text-align: center;
@@ -64,31 +64,129 @@
     min-width: 800px;
     max-width: 1200px;
   }
-  .inactive {
-    display: none;
-  }
-  .halfCol {
-    display: inline-block;
-    width: 49%;
-  }
-  .thirdCol {
-    display: inline-block;
-    width: 30%;
-  }
-  .formButtons {
-    padding: 20px;
-  }
-  .goSubmit {
-    float: right;
-    margin-top: 2px;
-  }
-  .button.danger {
-    border: 1px solid var(--danger);
-    border-radius: 50%;
-    display: inline-block;
-    font-weight: bold;
-    height: 15px;
-    line-height: 15px;
-    text-align: center;
-    width: 15px;
-  }
+  /* COLUMNS */
+    .halfCol {
+      display: inline-block;
+      width: 49%;
+    }
+    .thirdCol {
+      display: inline-block;
+      width: 30%;
+    }
+  /* BUTTONS */
+    .formButtons {
+      padding: 20px;
+    }
+    .goSubmit {
+      float: right;
+      margin-top: 2px;
+    }
+    .button.danger {
+      border: 1px solid var(--danger);
+      border-radius: 50%;
+      display: inline-block;
+      font-weight: bold;
+      height: 15px;
+      line-height: 15px;
+      text-align: center;
+      width: 15px;
+    }
+  /* STATE */
+    .inactive {
+      display: none;
+    }
+  /* LISTS */
+    .listing {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      text-align: left;
+    }
+    .listing li {
+      padding: 5px 0;
+      background-color: rgba(0,0,0,0.1);
+      border-bottom: 2px solid rgba(0,0,0,0.3);
+    }
+    .listing .header {
+      background-color: rgba(0,0,0,0.3);
+      border: 2px solid rgba(0,0,0,1);
+    }
+    .listing .cellBlock {
+      display: inline-block;
+      line-height: 20px;
+      vertical-align: top;
+    }
+    .transactionsList {
+      composes: listing;
+      margin: 20px auto 0;
+      text-align: center;
+      width: 90%;
+      min-width: 800px;
+      max-width: 1200px;
+    }
+    .index {
+      composes: cellBlock;
+      width: 18%;
+    }
+    .playerIn {
+      composes: cellBlock;
+      width: 25%;
+    }
+    .description {
+      composes: cellBlock;
+      width: 30%;
+    }
+    .playerOut {
+      composes: cellBlock;
+      width: 25%;
+    }
+
+    .realEstateList {
+      composes: listing;
+      font-size: 10px;
+    }
+    .realEstateList .cellBlock {
+      margin: 0 5px;
+    }
+    .owner {
+      composes: cellBlock;
+      text-align: center;
+      width: 90px;
+    }
+    .color {
+      composes: cellBlock;
+      text-align: center;
+      width: 30px;
+    }
+    .name {
+      composes: cellBlock;
+      text-align: left;
+      width: 220px;
+    }
+    .buyValue {
+      composes: cellBlock;
+      text-align: center;
+      width: 50px;
+    }
+    .action {
+      composes: cellBlock;
+      text-align: left;
+    }
+    .realEstateList form {
+      display: inline-block;
+    }
+    .realEstateActionForm select {
+      width: 126px;
+    }
+    .realEstateTransaction {
+      display: inline-block;
+      margin-left: 5px;
+      width: 267px;
+    }
+    .reaEstateTransaction form {
+      width: 100%;
+    }
+
+
+
+
