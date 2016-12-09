@@ -5,6 +5,7 @@ import Wanderer from "./components/wanderer";
 
 export const routes = (
   <Route path="/" component={Game}>
-    <Route path="/game" component={Wanderer}/>
+    <Route path="/market" component={Wanderer}/>
+    <Route path="/salesplace" component={Wanderer}/>
   </Route>
 );

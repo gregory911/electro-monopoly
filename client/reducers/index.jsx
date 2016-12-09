@@ -28,7 +28,25 @@ const playersQty = (store, action) => {
   return store || {value: 2};
 };
 
+const players = (store, action, value) => {
+  if (action.type === "EDIT_PLAYER") {
+    let players = Object.assign({}, store);
+    if(action.value && action.playerId) {
+      if(players[action.playerId]) {
+        players[action.playerId].name = action.value
+      } else {
+        players[action.playerId] = {name: action.value}
+      }
+    } else if (!action.value && action.playerId) {
+      delete players[action.playerId];
+    }
+    return players;
+  }
+  return store || {bank: {name: 'Banque'} };
+};
+
 export default combineReducers({
   gameStart,
-  playersQty
+  playersQty,
+  players
 });

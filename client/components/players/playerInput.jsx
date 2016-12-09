@@ -4,10 +4,11 @@ import styles from "../../styles/base.css";
 class PlayerInput extends React.Component {
   render() {
     const props = this.props;
-    const playerNumber = props.value;
-    const playerTag = "player"+playerNumber;
-    console.log('LOADING PLAYER INPUT');
-    console.log(props);
+    const {playerNumber, playerId} = props;
+    let playerName = "";
+    if(props.player) {
+      playerName = props.player.name;
+    }
     let removeBtn = "";
     if(playerNumber > 2) {
       removeBtn = (<button type="button" onClick={props.onRemovePlayer}>Remove</button>)
@@ -17,7 +18,7 @@ class PlayerInput extends React.Component {
         <h2>Player {playerNumber}</h2>
         <label>
           Player Name :
-          <input type="text" id={playerTag} name={playerTag} data-priority={playerNumber}/>
+          <input type="text" id={playerId} name={playerId} data-priority={playerNumber} onChange={props.onChange} value={playerName}/>
           {removeBtn}
         </label>
       </div>
@@ -26,6 +27,9 @@ class PlayerInput extends React.Component {
 }
 
 PlayerInput.propTypes = {
+  playerNumber: PropTypes.number.isRequired,
+  playerName: PropTypes.string,
+  player: PropTypes.object
 };
 
 export default PlayerInput;

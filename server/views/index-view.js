@@ -11,7 +11,12 @@ import Promise from "bluebird";
 function createReduxStore(req, match) { // eslint-disable-line
   const initialState = {
     gameStart: {value: false},
-    playersQty: {value: 2}
+    playersQty: {value: 2},
+    players: {
+      bank: {
+        name: 'Banque'
+      }
+    }
   };
 
   const store = createStore(rootReducer, initialState);

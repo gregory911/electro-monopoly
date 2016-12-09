@@ -1,5 +1,5 @@
-export const toggleGameStart = () => {
+export const toggleGameStatus = () => {
   return {
-    type: "TOGGLE_GAMESTART"
+    type: "TOGGLE_GAMESTATUS"
   };
 };

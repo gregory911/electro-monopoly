@@ -2,25 +2,50 @@ import React, {PropTypes} from "react";
 import {connect} from "react-redux";
 import PlayerInput from "./playerInput";
 import styles from "../../styles/base.css";
-import {incPlayerQty, decPlayerQty} from "../../actions/players";
+import {incPlayerQty, decPlayerQty, editPlayer} from "../../actions/players";
 
-const maxNumberOfPlayers = 6;
+const minPLayersQty = 2;
+const maxPlayersQty = 6;
+
+const getPlayersFields = (qty, players, onEdit, onRemove) => {
+  let playersFields = [];
+  for(let i = 1; i <= qty; i++) {
+    let playerId = "player"+i.toString();
+    playersFields.push(<PlayerInput key={playerId} playerId={playerId} playerNumber={i} player={players["player"+i]} onChange={onEdit} onRemovePlayer={onRemove} />);
+  }
+  return playersFields;
+}
+
+const getAddPlayerBtn = (qty, onAdd) => {
+  let addButton = (<button type="button" onClick={onAdd}>Add player</button>);
+  if(qty === 6) {
+    addButton = "";
+  }
+  return addButton;
+}
+
+const getRealPlayerQty = (qty, gameStatus, players) => {
+  let newQty = 0;
+  if(gameStatus) {
+    for(let playerId in players) {
+      if(playerId !== 'bank') {
+        newQty++;
+      }
+    }
+  } else {
+    newQty = qty;
+  }
+  return newQty;
+}
 
 class PlayersBlock extends React.Component {
   render() {
     const props = this.props;
-    const {gameStart, playersQty} = props;
-    console.log('LOADING PLAYERS BLOCK');
-    console.log(props);
-    let playersFields = [];
-    for(let i = 1; i <= playersQty; i++) {
-      playersFields.push(<PlayerInput key={"player"+i.toString()} value={i} onRemovePlayer={props.onRemovePlayer} />);
-    }
-    let addButton = (<button type="button" onClick={props.onAddPlayer}>Add player</button>);
-    if(playersQty === 6) {
-      addButton = "";
-    }
-    if(!gameStart) {
+    const {gameStatus, playersQty, location} = props;
+    console.log('PLAYERS -- ',props);
+    if(!gameStatus) {
+      let playersFields = getPlayersFields(playersQty, props.players, props.onEditPlayer, props.onRemovePlayer)
+      let addButton = getAddPlayerBtn(playersQty, props.onAddPlayer);
       return (
         <form id="playersForm">
           <div id="playersFields">
@@ -33,7 +58,7 @@ class PlayersBlock extends React.Component {
             </div>*/}
             <div>
               {addButton}
-              <input type="submit" value="Start Game"/>
+              <input type="button" onClick={props.onGameStart} value="Start Game"/>
             </div>
           </div>
         </form>
@@ -48,12 +73,14 @@ class PlayersBlock extends React.Component {
 }
 
 PlayersBlock.propTypes = {
-  playersQty: PropTypes.number.isRequired
+  playersQty: PropTypes.number.isRequired,
+  players: PropTypes.object
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    playersQty: state.playersQty.value,
+    playersQty: getRealPlayerQty(state.playersQty.value, ownProps.gameStatus, ownProps.players),
+    players: state.players
   };
 };
 
@@ -64,6 +91,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onRemovePlayer: () => {
       dispatch(decPlayerQty());
+    },
+    onEditPlayer: (evt) => {
+      dispatch(editPlayer(evt));
     }
   };
 };
