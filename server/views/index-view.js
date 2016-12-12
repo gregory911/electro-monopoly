@@ -7,16 +7,58 @@ import {routes} from "../../client/routes";
 import {createStore} from "redux";
 import rootReducer from "../../client/reducers";
 import Promise from "bluebird";
+import Properties from "../../client/fakestores/properties";
 
 function createReduxStore(req, match) { // eslint-disable-line
   const initialState = {
-    gameStart: {value: false},
-    playersQty: {value: 2},
-    players: {
-      bank: {
-        name: 'Banque'
+    game: {
+      status: false,
+      currentTurn: {
+        dblCount: 0,
+        diceRoll: null,
+        playerIndex: null
       }
-    }
+    },
+    players: [
+      {
+        id: "bank",
+        name: 'Banque',
+        priority: 0,
+      },
+      {
+        id: "player1",
+        name: "Player 1",
+        priority: 1,
+        amount: 0,
+        cards: null,
+        position: 1,
+        prison: {
+          status: false,
+          turns: 0
+        }
+      },
+      {
+        id: "player2",
+        name: "Player 2",
+        priority: 2,
+        amount: 0,
+        cards: null,
+        position: 1,
+        prison: {
+          status: false,
+          turns: 0
+        }
+      }
+    ],
+    transactions: [
+      {
+        amount: 0,
+        playerIn: null,
+        playerOut: null,
+        description: ""
+      }
+    ],
+    properties: Properties
   };
 
   const store = createStore(rootReducer, initialState);

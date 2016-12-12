@@ -6,21 +6,27 @@ import styles from "../../styles/base.css";
 class TransactionItem extends React.Component {
   render() {
     const props = this.props;
-    const {index, transactionItem} = props;
-    return (
-      <li>
-        <div className={styles.index}>{index+1}</div>
-        <div className={styles.playerIn}>{transactionItem.playerIn.name}</div>
-        <div className={styles.description}>{transactionItem.description}<br/>Montant : {Utils.renderAmount(transactionItem.amount)}</div>
-        <div className={styles.playerOut}>{transactionItem.playerOut.name}</div>
-      </li>
-    );
+    const {index, transactionItem, playerIn, playerOut} = props;
+    if(playerIn && playerOut) {
+      return (
+        <li>
+          <div className={styles.index}>{index}</div>
+          <div className={styles.playerIn}>{playerIn.name}</div>
+          <div className={styles.description}>{transactionItem.description}<br/>Montant : {Utils.renderAmount(transactionItem.amount)}</div>
+          <div className={styles.playerOut}>{playerOut.name}</div>
+        </li>
+      );
+    } else {
+      return null;
+    }
   }
 }
 
 TransactionItem.propTypes = {
-  index: PropTypes.number,
-  item: PropTypes.object
+  index: PropTypes.number.isRequired,
+  transactionItem: PropTypes.object.isRequired,
+  playerIn: PropTypes.object.isRequired,
+  playerOut: PropTypes.object.isRequired
 };
 
 export default TransactionItem;

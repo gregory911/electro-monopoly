@@ -1,11 +1,14 @@
 import React from "react";
 import {Route} from "react-router";
+import App from "./components/app";
 import Game from "./components/game";
-import Wanderer from "./components/wanderer";
+import RealEstateList from "./components/realEstate/realEstateList";
+import HouseMarket from "./components/houseMarket/houseMarket";
 
 export const routes = (
-  <Route path="/" component={Game}>
-    <Route path="/market" component={Wanderer}/>
-    <Route path="/salesplace" component={Wanderer}/>
+  <Route path="/" component={App}>
+    <Route path="/game" component={Game}/>
+    <Route path="/buildings" component={HouseMarket}/>
+    <Route path="/market" component={RealEstateList}/>
   </Route>
 );

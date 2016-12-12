@@ -12,7 +12,9 @@ class RealEstateItem extends React.Component {
     return (
       <li>
         <div className={styles.owner}>Owner</div>
-        <div className={styles.color}>{item.color.name}</div>
+        <div className={styles.realEstateColor}>
+          <span className={styles[item.color.name+"_spot"]}>&nbsp;</span>
+        </div>
         <div className={styles.name}>{item.name}</div>
         <div className={styles.buyValue}>{Utils.renderAmount(item.value)}</div>
         <div className={styles.action}>Action</div>

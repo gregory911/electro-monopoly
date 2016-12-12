@@ -4,21 +4,17 @@ import styles from "../../styles/base.css";
 class PlayerInput extends React.Component {
   render() {
     const props = this.props;
-    const {playerNumber, playerId} = props;
-    let playerName = "";
-    if(props.player) {
-      playerName = props.player.name;
-    }
+    const {playerIndex, player} = props;
     let removeBtn = "";
-    if(playerNumber > 2) {
-      removeBtn = (<button type="button" onClick={props.onRemovePlayer}>Remove</button>)
+    if(playerIndex > 2) {
+      removeBtn = (<button type="button" data-index={playerIndex} onClick={props.onRemovePlayer}>Remove</button>)
     }
     return (
       <div className={styles.halfCol}>
-        <h2>Player {playerNumber}</h2>
+        <h2>Player {playerIndex}</h2>
         <label>
           Player Name :
-          <input type="text" id={playerId} name={playerId} data-priority={playerNumber} onChange={props.onChange} value={playerName}/>
+          <input type="text" name={player.id} data-index={playerIndex} onChange={this.props.onChange} value={player.name}/>
           {removeBtn}
         </label>
       </div>
@@ -27,8 +23,7 @@ class PlayerInput extends React.Component {
 }
 
 PlayerInput.propTypes = {
-  playerNumber: PropTypes.number.isRequired,
-  playerName: PropTypes.string,
+  playerIndex: PropTypes.number.isRequired,
   player: PropTypes.object
 };
 

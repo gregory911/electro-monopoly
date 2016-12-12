@@ -15,44 +15,6 @@
   --service: #000000;
 }
 
-/* COLOR CODES */
-  .danger {
-    color: red;
-  }
-  .success {
-    color: var(--success);
-  }
-  .purple_spot {
-    background-color: var(--purple);
-  }
-  .paleblue_spot {
-    background-color: var(--paleblue);
-  }
-  .rose_spot {
-    background-color: var(--rose);
-  }
-  .orange_spot {
-    background-color: var(--orange);
-  }
-  .red_spot {
-    background-color: var(--red);
-  }
-  .yellow_spot {
-    background-color: var(--yellow);
-  }
-  .green_spot {
-    background-color: var(--green);
-  }
-  .blue_spot {
-    background-color: var(--blue);
-  }
-  .airport_spot {
-    background-color: var(--airport);
-  }
-  .service_spot {
-    background-color: var(--service);
-  }
-
 /* GENERAL */
   body {
     color: var(--black);
@@ -95,6 +57,13 @@
     .inactive {
       display: none;
     }
+  .spot {
+    border-radius: 50%;
+    display: inline-block;
+    height: 20px;
+    margin: 0 5px;
+    width: 20px;
+  }
   /* LISTS */
     .listing {
       list-style: none;
@@ -116,14 +85,6 @@
       line-height: 20px;
       vertical-align: top;
     }
-    .transactionsList {
-      composes: listing;
-      margin: 20px auto 0;
-      text-align: center;
-      width: 90%;
-      min-width: 800px;
-      max-width: 1200px;
-    }
     .index {
       composes: cellBlock;
       width: 18%;
@@ -139,14 +100,6 @@
     .playerOut {
       composes: cellBlock;
       width: 25%;
-    }
-
-    .realEstateList {
-      composes: listing;
-      font-size: 10px;
-    }
-    .realEstateList .cellBlock {
-      margin: 0 5px;
     }
     .owner {
       composes: cellBlock;
@@ -172,8 +125,27 @@
       composes: cellBlock;
       text-align: left;
     }
+
+    .transactionsList {
+      composes: listing;
+      margin: 20px auto 0;
+      text-align: center;
+      width: 90%;
+      min-width: 800px;
+      max-width: 1200px;
+    }
+    .realEstateList {
+      composes: listing;
+      font-size: 10px;
+    }
+    .realEstateList .cellBlock {
+      margin: 0 5px;
+    }
     .realEstateList form {
       display: inline-block;
+    }
+    .realEstateColor {
+      composes: color;
     }
     .realEstateActionForm select {
       width: 126px;
@@ -187,6 +159,88 @@
       width: 100%;
     }
 
+    .playerBuildings {
+      display: inline-block;
+      margin: 0 1%;
+      vertical-align: top;
+      width: 30%;
+    }
+    .houseMarketList {
+      composes: listing;
+      font-size: 10px;
+    }
+    .houseMarketList .header {
+      font-size: 12px;
+      text-align: center;
+    }
+    .houseMarketColor {
+      composes: color;
+    }
+    .houseMarketName {
+      composes: name;
+      width: 160px;
+    }
+    .houseMarketBuildings {
+      composes: cellBlock;
+      float: right;
+      height: 20px;
+      margin-left: 4px;
+      text-align: center;
+      width: 27px;
+    }
+    .houseMarketAmount {
+      composes: cellBlock;
+      line-height: 20px;
+      float: right;
+    }
+
+/* COLOR CODES */
+  .danger {
+    color: red;
+  }
+  .success {
+    color: var(--success);
+  }
+  .purple_spot {
+    composes: spot;
+    background-color: var(--purple);
+  }
+  .paleblue_spot {
+    composes: spot;
+    background-color: var(--paleblue);
+  }
+  .rose_spot {
+    composes: spot;
+    background-color: var(--rose);
+  }
+  .orange_spot {
+    composes: spot;
+    background-color: var(--orange);
+  }
+  .red_spot {
+    composes: spot;
+    background-color: var(--red);
+  }
+  .yellow_spot {
+    composes: spot;
+    background-color: var(--yellow);
+  }
+  .green_spot {
+    composes: spot;
+    background-color: var(--green);
+  }
+  .blue_spot {
+    composes: spot;
+    background-color: var(--blue);
+  }
+  .airport_spot {
+    composes: spot;
+    background-color: var(--airport);
+  }
+  .service_spot {
+    composes: spot;
+    background-color: var(--service);
+  }
 
 
 

@@ -1,52 +1,132 @@
 import {combineReducers} from "redux";
+import Properties from "../fakestores/properties";
 
-const gameStart = (store, action) => {
-  if (action.type === "TOGGLE_GAMESTART") {
-    return {
-      value: !store.value
-    };
-  }
-
-  return store || {value: false};
-};
-
-const playersQty = (store, action) => {
-  if (action.type === "INC_PLAYER_QTY") {
-    if(store.value < 6) {
-      return {
-        value: store.value + 1
-      }; 
-    }
-  } else if (action.type === "DEC_PLAYER_QTY") {
-    if(store.value > 2) {
-      return {
-        value: store.value - 1
-      }; 
-    }
-  }
-
-  return store || {value: 2};
+const game = (store, action) => {
+  let game = Object.assign({}, store);
+  switch(action.type) {
+    case "TOGGLE_GAMESTATUS":
+      game.status= !store.status;
+      break;
+    default:
+      game = store || {
+                        status: false,
+                        currentTurn: {
+                          dblCount: 0,
+                          diceRoll: null,
+                          playerIndex: null
+                        }
+                      };
+  };
+  return game;
 };
 
 const players = (store, action, value) => {
-  if (action.type === "EDIT_PLAYER") {
-    let players = Object.assign({}, store);
-    if(action.value && action.playerId) {
-      if(players[action.playerId]) {
-        players[action.playerId].name = action.value
-      } else {
-        players[action.playerId] = {name: action.value}
+  let players = !store ? store : store.map((player)=>(player));
+  let payload = action.payload || {};
+  switch (action.type) {
+    case "ADD_PLAYER":
+      if(payload.index) {
+        players[payload.index] =  {
+                id: "player"+payload.index,
+                name: "Player "+payload.index,
+                priority: payload.index,
+                amount: 0,
+                cards: {},
+                position: 1,
+                prison: {
+                  status: false,
+                  turns: 0
+                }
+              };
       }
-    } else if (!action.value && action.playerId) {
-      delete players[action.playerId];
-    }
-    return players;
+      break;
+    case "REMOVE_PLAYER":
+      if(payload.index) {
+        players.splice(payload.index, 1);
+      }
+      break;
+    case "EDIT_PLAYER_NAME":
+      if(payload.value && payload.playerIndex) {
+        players[payload.playerIndex].name = payload.value;
+      }
+      break
+    case "CREDIT_PLAYER":
+      if(payload.index && payload.amount) {
+        players[payload.index].amount = players[payload.index].amount+payload.amount;
+      }
+      break
+    case "DEBIT_PLAYER":
+      if(payload.index && payload.amount) {
+        players[payload.index].amount = players[payload.index].amount-payload.amount;
+      }
+      break
+    default:
+      players = store || [
+                        {
+                          id: "bank",
+                          name: "Banque",
+                          priority: 0
+                        },
+                        {
+                          id: "player1",
+                          name: "Player 1",
+                          priority: 1,
+                          amount: 0,
+                          cards: {},
+                          position: 1,
+                          prison: {
+                            status: false,
+                            turns: 0
+                          }
+                        },
+                        {
+                          id: "player2",
+                          name: "Player 2",
+                          priority: 2,
+                          amount: 0,
+                          cards: {},
+                          position: 1,
+                          prison: {
+                            status: false,
+                            turns: 0
+                          }
+                        }
+                      ];
   }
-  return store || {bank: {name: 'Banque'} };
+  return players;
+};
+
+const transactions = (store, action) => {
+  let transactions = !store ? store : store.map((transaction)=>(transaction));
+  switch (action.type) {
+    case "ADD_TRANSACTION":
+      if(action.payload) {
+        transactions.push(action.payload);
+      }
+      break;
+    default:
+      transactions = store || [
+                        {
+                          amount: 0,
+                          playerIn: null,
+                          playerOut: null,
+                          description: ""
+                        }
+                      ];
+  }
+  return transactions;
+};
+
+const properties = (store, action) => {
+  switch (action.type) {
+    default:
+      return store || Properties;
+  }
 };
 
 export default combineReducers({
-  gameStart,
-  playersQty,
-  players
+  game,
+  players,
+  transactions,
+  properties
 });

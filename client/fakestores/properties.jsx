@@ -677,9 +677,45 @@ const Properties = () => {
     }
     return propertiesByColor;
   };
+  const groupByOwner = (playerId) => {
+    var ownedProperties = [];
+    for(var key in list) {
+      var property = list[key];
+      var colorGroup = property.color.id;
+      if(typeof(ownedProperties[colorGroup]) === 'undefined') {
+        ownedProperties[colorGroup] = {
+          owned: [],
+          canBuild: false,
+          type: property.type,
+          mortgage: false,
+          total: 1
+        };
+        if(property.type === 'property') {
+          ownedProperties[colorGroup].buildingPrice = property.building.price;
+        }
+      } else {
+        ownedProperties[colorGroup].total += 1;
+      }
+      if(property.owner === playerId) {
+        ownedProperties[colorGroup].owned.push(key);
+      }
+      if(property.mortgage.status === true) {
+        ownedProperties[colorGroup].mortgage = true;
+      }
+    }
+    // REPLACE THIS FOR BY MAP
+    for(var colorId in ownedProperties) {
+      var colorGroup = ownedProperties[colorId];
+      if(colorGroup.owned.length === colorGroup.total && colorGroup.mortgage === false) {
+        colorGroup.canBuild = true;
+      }
+    }
+    return ownedProperties;
+  };
   return {
     list: list,
-    canSellByColor: canSellByColor()
+    canSellByColor: canSellByColor(),
+    groupByOwner: groupByOwner,
   }
 }
 export default Properties();

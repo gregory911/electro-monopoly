@@ -3,47 +3,26 @@ import TransactionItem from "./transactionItem";
 import styles from "../../styles/base.css";
 
 class TransactionsList extends React.Component {
-  renderTransactionsItems (transactionsItemsArr) {
-    return transactionsItemsArr.map((item, index) => (
-      <TransactionItem key={index} index={index} transactionItem={item} />
-    ));
+  renderTransactionsItems (transactionsItemsArr, players) {
+    return transactionsItemsArr.map((item, index) => {
+      let playerIn = null;
+      let playerOut = null;
+      for(let i = 0; i < players.length; i++) {
+        if(item.playerIn === players[i].id) {
+          console.log('FOUND IN');
+          playerIn = players[i];
+        }
+        if(item.playerOut === players[i].id) {
+          console.log('FOUND OUT');
+          playerOut = players[i];
+        }
+      }
+      console.log(playerIn, playerOut);
+      return (<TransactionItem key={index} index={index} transactionItem={item} playerIn={playerIn} playerOut={playerOut} />)
+    });
   }
   render() {
     const props = this.props;
-    // TEST DATA
-    props.transactions = [
-      {
-        description: "Solde de départ",
-        amount: 500000,
-        playerIn: {
-          name: "Player 1"
-        },
-        playerOut: {
-          name: "Banque"
-        }
-      },
-      {
-        description: "Solde de départ",
-        amount: 500000,
-        playerIn: {
-          name: "Player 2"
-        },
-        playerOut: {
-          name: "Banque"
-        }
-      },
-      {
-        description: "Achat de maison - Carp Grove",
-        amount: 1000000,
-        playerIn: {
-          name: "Banque"
-        },
-        playerOut: {
-          name: "Player 1"
-        }
-      }
-    ];
-    // EO TEST DATA
     return (
       <ul className={styles.transactionsList}>
         <li className={styles.header}>
@@ -52,13 +31,15 @@ class TransactionsList extends React.Component {
           <div className={styles.description}>Description</div>
           <div className={styles.playerOut}>Cash out</div>
         </li>
-        {this.renderTransactionsItems(props.transactions)}
+        {this.renderTransactionsItems(props.transactions, props.players)}
       </ul>
     );
   }
 }
 
 TransactionsList.propTypes = {
+  transactions: PropTypes.array.isRequired,
+  players: PropTypes.array.isRequired
 };
 
 export default TransactionsList;
