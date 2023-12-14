@@ -5,7 +5,7 @@
   "homepage": "",
   "author": {
     "name": "Gregory Gegoux",
-    "email": "gregory.gegoux@gmail.com",
+    "email": "contact@gregwebdev.com",
     "url": "http://gregwebdev.com"
   },
   "contributors": [],
@@ -22,7 +22,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "gregory911/Monopoly"
+    "url": "gregory911/electro-monopoly"
   },
   "license": "BSD-2-Clause-FreeBSD",
   "engines": {
@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "electrode-archetype-react-app-dev": "^1.0.0",
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "gulp-cli": "^2.3.0"
   }
 }
